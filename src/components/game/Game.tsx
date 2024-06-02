@@ -113,7 +113,7 @@ function Game({playerInfo}: gameProp){
         setMessages([...messages, message])
     })
     
-    const opponentMove = (move) => {
+    const opponentMove = (move: Move) => {
         console.log("Opponent move",move)
         const gameCopy =  game ;
         gameCopy.move(move);
