@@ -228,15 +228,15 @@ function Game({playerInfo}: gameProp){
 
     return(
         <div className="grid  place-content-center  pt-10">
-           <div className="grid grid-cols-2 grid-rows-2 ">
-                <div className="w-[600px] h-[600px] place-content-center">
+           <div className="grid lg:grid-cols-2 lg:grid-rows-2 ">
+                <div className="lg:w-[600px] lg:h-[600px] place-content-center">
                     <Chessboard position={boardState} boardOrientation={boardOrientation} 
                         arePiecesDraggable={isTurn} onPieceDrop={onDrop} />
                 </div>
-                <div className="flex place-content-center">
-                    <div className="block place-content-center w-[400px] h-[520px] ">
+                <div className="flex lg:place-content-center">
+                    <div className="block lg:place-content-center w-[400px] lg:h-[520px] max-lg:pt-4 h[500px]">
                         <ul id="messageDisplay" key={uuidv4()}
-                            className=" bg-slate-100 h-[460px] pl-4 overflow-y-auto scroll">
+                            className=" bg-slate-100 lg:h-[460px] sm:h-[260px] pl-4 overflow-y-auto scroll">
                             {messages}
                         </ul>                    
                         
@@ -244,14 +244,17 @@ function Game({playerInfo}: gameProp){
                             <span>
                                 <textarea  id="message" placeholder="Your message" value={userMessage}
                                     onChange={(e)=>setUserMessage(e.target.value)}
-                                    className="w-full h-20 wrap resize-none" required/><br/>
+                                    className="w-full h-20 wrap resize-none border rounded-sm" required/><br/>
                             </span>
-                            <button className='justify-items-end' type="submit">Send</button>
+                            <div className="flex justify-end">
+                                <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 
+                                    px-4 rounded  " type="submit">Send</button>
+                            </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <div className="w-[400px] h-[220px] pt-8">
+                    <div className="w-[400px] h-[220px] lg:pt-8 max-lg:pt-4">
                         <ul id="movesDisplay" className=" bg-slate-100 h-[460px] pl-4 overflow-y-auto scroll"> 
                             {moves}                                                
                         </ul>
