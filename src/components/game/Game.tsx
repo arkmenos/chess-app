@@ -117,12 +117,24 @@ function Game({playerInfo}: gameProp){
         console.log("Opponent move",move)
         const gameCopy =  game ;
         gameCopy.move(move);
-        setGame(gameCopy);     
+        setGame(gameCopy);            
+        setBoardstate(game.fen())
 
-        if(modType !== Player.SPECTATOR){
+        if(game.isGameOver()){
+            let whoWon;
+            if(game.turn() === "b"){
+                whoWon ="White won!!!"
+            }
+            else {
+                whoWon = "Black won!!!"
+            }
+            const message =  <li key={uuidv4()}>Game Over!! {whoWon}</li>                
+            setMessages([...messages, message])
+            setIsTurn(false)
+        }else if(modType !== Player.SPECTATOR){
             setIsTurn(true)
         } 
-        setBoardstate(game.fen())
+
         const moveMsg = <li key={uuidv4()}>{gameCopy.moveNumber()}:  {move.piece}  {move.from}  {move.to}</li>
         setMoves([...moves,moveMsg])       
     }
@@ -210,6 +222,17 @@ function Game({playerInfo}: gameProp){
             socket.emit("isThreefoldRepetition")
         }
     
+        if(game.isGameOver()){
+            let whoWon;
+            if(game.turn() === "b"){
+                whoWon ="White won!!!"
+            }
+            else {
+                whoWon = "Black won!!!"
+            }
+            const message =  <li key={uuidv4()}>Game Over!! {whoWon}</li>                
+            setMessages([...messages, message])
+        }
         const moveMsg = <li>{game.moveNumber()}.  {move.piece}  {move.to}  {move.from}</li>
         setMoves([...moves,moveMsg])
         setIsTurn(false)
